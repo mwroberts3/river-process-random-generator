@@ -1,15 +1,30 @@
+/* Main Styling */
 body {
   font-family: 'Courier New', Courier, monospace;
 }
 
 header {
-  width: 100%;
+  text-align: center;
 }
 
 header h1 {
-  width: 500px;
-  margin: 0 auto;
   text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+}
+
+footer h4 {
+  margin: 100px 0 0;
+}
+
+button {
+  display: block;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #aaa;
+  border-radius: 5px;
 }
 
 #tasks-per-day-display {
@@ -24,6 +39,7 @@ header h1 {
   font-size: 20px;
 }
 
+/* Task Classes */
 .art-life {
   font-family: ink-free;
   color: green;

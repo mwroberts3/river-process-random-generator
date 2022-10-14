@@ -3,7 +3,8 @@ import React from 'react'
 const Task = ({task, timesPerWeek}) => {
   return (
     <>
-      <div>{task} - {timesPerWeek}</div>
+      {console.log(timesPerWeek)}
+      <div>{timesPerWeek} - {task}</div>
     </>
   )
 }
