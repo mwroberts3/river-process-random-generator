@@ -1,0 +1,50 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+header {
+  width: 100%;
+}
+
+header h1 {
+  width: 500px;
+  margin: 0 auto;
+  text-decoration: underline;
+}
+
+#tasks-per-day-display {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#tasks-per-day-display div {
+  width: 50%;
+  font-size: 20px;
+}
+
+.art-life {
+  font-family: ink-free;
+  color: green;
+  font-weight: bold;
+}
+
+.wellness {
+
+}
+
+.the-game {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 300;
+}
+
+.social {
+  color: blue;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.dopa-limit {
+  background: pink;
+}
