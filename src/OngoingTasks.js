@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import Task from './Task'
-import { ongoingTasks } from './data'
 
-const OngoingTasks = () => {
+const OngoingTasks = ({masterTaskList, unmutatedTaskList}) => {
   const [showTasks, setShowTasks] = useState(false);
 
   if (showTasks) {
@@ -10,7 +9,7 @@ const OngoingTasks = () => {
       <div>
       <h1>Ongoing Tasks</h1>
       <button onClick={() => setShowTasks(false)}>Hide</button>
-      {ongoingTasks.map((item) => {
+      {unmutatedTaskList.map((item) => {
         return <Task key={item.id} {...item}/>})}
       </div>
     )

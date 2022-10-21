@@ -1,6 +1,8 @@
 /* Main Styling */
 body {
   font-family: 'Courier New', Courier, monospace;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 header {
@@ -20,23 +22,30 @@ footer h4 {
 }
 
 button {
+  cursor: pointer;
   display: block;
-  padding: 5px;
+  font-weight: bold;
+  padding: 10px;
   margin: 5px 0;
-  border: 1px solid #aaa;
+  border: none;
   border-radius: 5px;
+  background: rgb(193, 255, 193);
 }
 
 #tasks-per-day-display {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
 #tasks-per-day-display div {
   width: 50%;
   font-size: 20px;
+}
+
+#tasks-per-day-display div div {
+  width: 100%;
 }
 
 /* Task Classes */
