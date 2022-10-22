@@ -13,7 +13,7 @@ function App() {
         <h1>River Process Random Generator</h1>
       </header>
       <OngoingTasks masterTaskList={masterTaskList} unmutatedTaskList={unmutatedTaskList}/>
-      <TasksPerDayDisplay masterTaskList={masterTaskList}/>
+      <TasksPerDayDisplay masterTaskList={masterTaskList} unmutatedTaskList={unmutatedTaskList}/>
       <footer>
         <h4>see README.md for information on River Process</h4>
       </footer>

@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { masterTaskList } from './data';
 
-const TasksPerDayDisplay = ({masterTaskList}) => {
+const TasksPerDayDisplay = ({masterTaskList, unmutatedTaskList}) => {
   const [weeklyArray, setWeeklyArray] = useState([]);
   
   const calculateTasksPerDay = () => {
+    masterTaskList = structuredClone(unmutatedTaskList);
+
+    console.log(masterTaskList);
+
     let totalTasks = masterTaskList.reduce((accumulator, object) => {
       return accumulator + object.timesPerWeek;
     }, 0);
@@ -43,7 +48,7 @@ const TasksPerDayDisplay = ({masterTaskList}) => {
     <>
     <h1>Tasks Per Day</h1>
     <button>Save to Firebase</button>
-    <button>Randomize Tasks</button>
+    <button onClick={() => calculateTasksPerDay()}>Randomize Tasks</button>
     <section id='tasks-per-day-display'>
       {weeklyArray.map((day, index) => {
         return <div key={index}>
