@@ -3,14 +3,19 @@ body {
   font-family: 'Courier New', Courier, monospace;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
+  background-color: aliceblue;
+  border-left: 5px dashed brown;
+  border-right: 5px dashed brown;
 }
+
 
 header {
   text-align: center;
 }
 
 header h1 {
-  text-decoration: underline;
+  font-size: 36px;
 }
 
 footer {
@@ -39,12 +44,17 @@ button {
   flex-wrap: wrap;
 }
 
+#tasks-per-day-display h3 {
+  text-decoration: underline;
+}
+
 #tasks-per-day-display div {
   width: 50%;
   font-size: 20px;
 }
 
 #tasks-per-day-display div div {
+  margin-top: 5px;
   width: 100%;
 }
 
