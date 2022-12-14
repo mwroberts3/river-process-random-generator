@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Task from './Task'
 
-const OngoingTasks = ({ unmutatedTaskList }) => {
+const OngoingTasks = ({ unmutatedTaskList }: { unmutatedTaskList: any }) => {
   const [showTasks, setShowTasks] = useState(false);
 
-  const totalMinutes = unmutatedTaskList.reduce((accumulator, object) => {
-    return accumulator + object.minEstimate * object.timesPerWeek;
-  }, 0)
+  type Task = { id: number, task: string, timesPerWeek: number, class: string, timeFrame: string, minEstimate: number };
+
+  const totalMinutes = unmutatedTaskList.reduce((accumulator: number, task: Task) => accumulator + task.minEstimate * task.timesPerWeek, 0);
 
   const hours = Math.floor(totalMinutes / 60);
   const remainderMinutes = totalMinutes % 60;
