@@ -4,9 +4,7 @@ import Task from './Task'
 const OngoingTasks = ({ unmutatedTaskList }: { unmutatedTaskList: any }) => {
   const [showTasks, setShowTasks] = useState(false);
 
-  type Task = { id: number, task: string, timesPerWeek: number, class: string, timeFrame: string, minEstimate: number };
-
-  const totalMinutes = unmutatedTaskList.reduce((accumulator: number, task: Task) => accumulator + task.minEstimate * task.timesPerWeek, 0);
+  const totalMinutes = unmutatedTaskList.reduce((accumulator: number, task: any) => accumulator + task.minEstimate * task.timesPerWeek, 0);
 
   const hours = Math.floor(totalMinutes / 60);
   const remainderMinutes = totalMinutes % 60;

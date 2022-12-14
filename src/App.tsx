@@ -4,7 +4,9 @@ import TasksPerDayDisplay from './TasksPerDayDisplay';
 import { masterTaskList } from './data'
 
 function App() {
-  const unmutatedTaskList = structuredClone(masterTaskList);
+  type Task = { id: number | string, task: string, timesPerWeek: number, class: string, timeFrame: string, minEstimate: number };
+
+  const unmutatedTaskList: Array<Task> = structuredClone(masterTaskList);
 
   return (
     <>
