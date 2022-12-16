@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react'
+import { Task } from './data';
 
-const TasksPerDayDisplay = ({ masterTaskList, unmutatedTaskList }) => {
-  const [weeklyArray, setWeeklyArray] = useState([]);
+const TasksPerDayDisplay = ({ masterTaskList, unmutatedTaskList }: { masterTaskList: Task[], unmutatedTaskList: Task[] }) => {
+
+  type Day = { day: string, tasks: Task[], hours: string };
+
+  const [weeklyArray, setWeeklyArray] = useState<Day[]>([]);
 
   const calculateTasksPerDay = () => {
     masterTaskList = structuredClone(unmutatedTaskList);
 
-    let totalTasks = masterTaskList.reduce((accumulator, object) => {
+    let totalTasks = masterTaskList.reduce((accumulator: number, object: any) => {
       return accumulator + object.timesPerWeek;
     }, 0);
 
-    let tempWeeklyArray = [
+    let tempWeeklyArray: Array<Day> = [
       { day: 'Mon', tasks: [], hours: '' },
       { day: 'Tue', tasks: [], hours: '' },
       { day: 'Wed', tasks: [], hours: '' },
@@ -36,7 +40,7 @@ const TasksPerDayDisplay = ({ masterTaskList, unmutatedTaskList }) => {
 
     // set minutes per day estimate
     tempWeeklyArray.forEach((day) => {
-      const dailyTotalMinutes = day.tasks.reduce((accumulator, object) => {
+      const dailyTotalMinutes = day.tasks.reduce((accumulator: number, object: any) => {
         return accumulator + object.minEstimate
       }, 0);
 
@@ -45,8 +49,6 @@ const TasksPerDayDisplay = ({ masterTaskList, unmutatedTaskList }) => {
 
       day.hours = `${hours}:${remainderMinutes.toString().padStart(2, '0')}`;
     })
-
-    console.log(tempWeeklyArray);
 
     setWeeklyArray(tempWeeklyArray);
   }
@@ -58,7 +60,6 @@ const TasksPerDayDisplay = ({ masterTaskList, unmutatedTaskList }) => {
   return (
     <>
       <h1>Tasks Per Day</h1>
-      <button style={{ display: 'none' }}>Save to Firebase</button>
       <button onClick={() => calculateTasksPerDay()}>Randomize Tasks</button>
       <section id='tasks-per-day-display'>
         {weeklyArray.map((day, index) => {

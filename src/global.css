@@ -5,8 +5,8 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   background-color: aliceblue;
-  border-left: 5px dashed brown;
-  border-right: 5px dashed brown;
+  border-left: 5px dashed skyblue;
+  border-right: 5px dashed skyblue;
 }
 
 
@@ -58,6 +58,14 @@ button {
   width: 100%;
 }
 
+#ongoing-tasks-buttons-display {
+  display: flex;
+}
+
+#ongoing-tasks-buttons-display button {
+  margin-right: 5px;
+}
+
 /* Task Classes */
 .art-life {
   font-family: ink-free;
@@ -65,9 +73,7 @@ button {
   font-weight: bold;
 }
 
-.wellness {
-
-}
+.wellness {}
 
 .the-game {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;

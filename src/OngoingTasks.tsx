@@ -14,8 +14,12 @@ const OngoingTasks = ({ unmutatedTaskList }: { unmutatedTaskList: any }) => {
     return (
       <div>
         <h1>Ongoing Tasks <span>{totalHours} hours</span></h1>
-        <button onClick={() => setShowTasks(false)}>Hide</button>
-        {unmutatedTaskList.map((item) => {
+        <div id='ongoing-tasks-buttons-display'>
+          <button onClick={() => setShowTasks(false)}>Hide</button>
+          <button>Import from Firebase</button>
+          <button>Upload .txt File to Firebase</button>
+        </div>
+        {unmutatedTaskList.map((item: any) => {
           return <Task key={item.id} {...item} />
         })}
       </div>
@@ -25,7 +29,11 @@ const OngoingTasks = ({ unmutatedTaskList }: { unmutatedTaskList: any }) => {
   return (
     <div>
       <h1>Ongoing Tasks <span>{totalHours} hours</span></h1>
-      <button onClick={() => setShowTasks(true)}>Show</button>
+      <div id='ongoing-tasks-buttons-display'>
+        <button onClick={() => setShowTasks(true)}>Show</button>
+        <button>Import from Firebase</button>
+        <button>Upload .txt File to Firebase</button>
+      </div>
     </div>
   )
 }
