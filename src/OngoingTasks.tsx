@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import Task from './Task'
 
-const OngoingTasks = ({ unmutatedTaskList }: { unmutatedTaskList: any }) => {
+const OngoingTasks = ({ unmutatedTaskList, totalMinutes }: { unmutatedTaskList: any, totalMinutes: number }) => {
   const [showTasks, setShowTasks] = useState(false);
-
-  const totalMinutes = unmutatedTaskList.reduce((accumulator: number, task: any) => accumulator + task.minEstimate * task.timesPerWeek, 0);
 
   const hours = Math.floor(totalMinutes / 60);
   const remainderMinutes = totalMinutes % 60;
