@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import Task from './Task'
 
-const OngoingTasks = ({ unmutatedTaskList, totalMinutes }: { unmutatedTaskList: any, totalMinutes: number }) => {
+const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutatedTaskList: any, totalMinutes: number, minToHours: Function }) => {
   const [showTasks, setShowTasks] = useState(false);
 
-  const hours = Math.floor(totalMinutes / 60);
-  const remainderMinutes = totalMinutes % 60;
-  const totalHours = `${hours}:${remainderMinutes.toString().padStart(2, '0')}`;
+  const totalHours = minToHours(totalMinutes);
 
   if (showTasks) {
     return (

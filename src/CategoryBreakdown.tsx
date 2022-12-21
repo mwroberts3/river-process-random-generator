@@ -1,4 +1,6 @@
-const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes }: { unmutatedTaskList: any, totalMinutes: number }) => {
+import CategoryHeader from "./CategoryHeader";
+
+const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutatedTaskList: any, totalMinutes: number, minToHours: Function }) => {
 
   const categoryList = groupByMainCategory(unmutatedTaskList);
 
@@ -57,7 +59,7 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes }: { unmutatedTaskL
   return <>
     <h1>Category Breakdown</h1>
     {categoryList.map((category: any, index: number) => {
-      return <li key={index}>{category[0].category} {Math.round(category[0].totalMin / totalMinutes * 100)}%</li>
+      return <CategoryHeader key={index} categoryInfo={category[0]} totalMinutes={totalMinutes} minToHours={minToHours} />
     })}
   </>
 }
