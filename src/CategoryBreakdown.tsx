@@ -18,29 +18,31 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
       cate.forEach((task: any) => {
         totalMinutesByCategory += task.timesPerWeek * task.minEstimate;
 
-        subCategories.push({ category: task.categories[1], minutes: task.minEstimate * task.timesPerWeek });
+        subCategories.push({ category: task.categories[1], totalMin: task.minEstimate * task.timesPerWeek });
       });
 
       cate.unshift({ totalMin: totalMinutesByCategory, category: cate[cate.length - 1].categories[0], subCategories: tallySubcategories(subCategories) });
+
     });
 
-    console.log(tempList);
+    sortCategories(tempList, false);
+
+
     return tempList;
   }
 
   function tallySubcategories(subCategories: Array<any>) {
     let subCategoryTotals: Array<any> = []
-    // console.log(subCategories);
 
     for (let i = 0; i < subCategories.length; i++) {
       let totalSubcateMinutes = 0;
       for (let k = 0; k < subCategories.length; k++) {
         if (subCategories[i].category === subCategories[k].category) {
-          totalSubcateMinutes += subCategories[k].minutes;
+          totalSubcateMinutes += subCategories[k].totalMin;
         }
       }
 
-      subCategoryTotals.push(JSON.stringify({ category: subCategories[i].category, minutes: totalSubcateMinutes }));
+      subCategoryTotals.push(JSON.stringify({ category: subCategories[i].category, totalMin: totalSubcateMinutes }));
     }
 
     return listParse(subCategoryTotals);
@@ -53,7 +55,23 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
       list.splice(i, 1, JSON.parse(list[i]))
     }
 
+    sortCategories(list, true);
+
     return list;
+  }
+
+  function sortCategories(categoryList: any, subCatList: boolean) {
+    if (!subCatList) {
+      return categoryList.sort((a: any, b: any) => {
+        if (a[0].totalMin > b[0].totalMin) return -1;
+        else return 1;
+      })
+    } else {
+      return categoryList.sort((a: any, b: any) => {
+        if (a.totalMin > b.totalMin) return -1;
+        else return 1;
+      })
+    }
   }
 
   return <>

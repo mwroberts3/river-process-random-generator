@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>River Process Assist</h1>
+        <h1>River Process <small>v1.0.0</small></h1>
       </header>
       <OngoingTasks unmutatedTaskList={unmutatedTaskList} totalMinutes={totalMinutes} minToHours={minToHours} />
       <CategoryBreakdown unmutatedTaskList={unmutatedTaskList} totalMinutes={totalMinutes} minToHours={minToHours} />
