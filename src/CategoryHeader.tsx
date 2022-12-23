@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 const CategoryHeader = ({ categoryInfo, totalMinutes, minToHours }: { categoryInfo: any, totalMinutes: number, minToHours: Function }) => {
-  console.log(categoryInfo.subCategories);
 
   const [showSubs, setShowSubs] = useState(false);
 

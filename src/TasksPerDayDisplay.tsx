@@ -15,13 +15,13 @@ const TasksPerDayDisplay = ({ masterTaskList, unmutatedTaskList }: { masterTaskL
     }, 0);
 
     let tempWeeklyArray: Array<Day> = [
-      { day: 'Mon', tasks: [], hours: '' },
-      { day: 'Tue', tasks: [], hours: '' },
-      { day: 'Wed', tasks: [], hours: '' },
-      { day: 'Thu', tasks: [], hours: '' },
-      { day: 'Fri', tasks: [], hours: '' },
-      { day: 'Sat', tasks: [], hours: '' },
-      { day: 'Sun', tasks: [], hours: '' }];
+      { day: 'Monday', tasks: [], hours: '' },
+      { day: 'Tuesday', tasks: [], hours: '' },
+      { day: 'Wednesday', tasks: [], hours: '' },
+      { day: 'Thursday', tasks: [], hours: '' },
+      { day: 'Friday', tasks: [], hours: '' },
+      { day: 'Saturday', tasks: [], hours: '' },
+      { day: 'Sunday', tasks: [], hours: '' }];
 
     for (let i = 0; i < totalTasks; i++) {
       for (let k = 0; k < masterTaskList.length; k++) {
