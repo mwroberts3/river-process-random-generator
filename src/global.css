@@ -83,10 +83,26 @@ button {
   margin-right: 5px;
 }
 
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+
 .big-chart {
+  position: absolute;
   width: 50%;
+  top: 0;
   cursor: pointer;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  z-index: 2;
+}
+
+.small-chart {
+  position: absolute;
+  width: 50%;
+  top: 0;
+  /* z-index: 2; */
 }
 
 /* Task Classes */

@@ -1,5 +1,6 @@
 import CategoryHeader from "./CategoryHeader";
 import { PieChart } from "react-minimal-pie-chart";
+import { useState } from 'react';
 
 const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutatedTaskList: any, totalMinutes: number, minToHours: Function }) => {
 
@@ -13,6 +14,7 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
 
   const categoryList = groupByMainCategory(unmutatedTaskList);
   const chartData: Data = [];
+  const [showSubChart, setShowSubChart] = useState(false);
 
   // console.log(categoryList);
 
@@ -21,7 +23,7 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
 
   function convertToChartData(list: any) {
     for (let i = 0; i < list.length; i++) {
-      chartData.push({ title: list[i][0].category, value: list[i][0].totalMin, color: generateRandomColorHex() })
+      chartData.push({ title: `${list[i][0].category.substring(0, 10)}`, value: Math.round(list[i][0].totalMin / totalMinutes * 100), color: generateRandomColorHex() })
     }
   };
 
@@ -42,15 +44,6 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
 
     return hex;
   }
-
-  // console.log(chartData);
-
-  // const chartData: Data = [
-  //   { title: 'One', value: 42, color: '#E38627', },
-  //   { title: 'Two', value: 39, color: '#C13C37' },
-  //   { title: 'Three', value: 12, color: '#6A2135' },
-  //   { title: 'Four', value: 6, color: '#6A0005' },
-  // ];
 
   function groupByMainCategory(taskList: any) {
     let tempList: any = [];
@@ -122,49 +115,60 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
     }
   }
 
+  function createSubCatPieChart(e: any) {
+    let selectedCategoryTitle: string = e.target.innerHTML.split('>')[1].split('</')[0];
+
+    console.log(selectedCategoryTitle);
+  }
+
   return <>
     <h1>Category Breakdown</h1>
     {categoryList.map((category: any, index: number) => {
       return <CategoryHeader key={index} categoryInfo={category[0]} totalMinutes={totalMinutes} minToHours={minToHours} />
     })}
-    <PieChart
-      className="big-chart"
-      animate
-      animationDuration={500}
-      animationEasing="linear"
-      center={[50, 50]}
-      data={chartData} label={(data) => `${data.dataEntry.title} \n ${data.dataEntry.value}`}
-      lengthAngle={360}
-      lineWidth={30}
-      paddingAngle={5}
-      radius={35}
-      startAngle={90}
-      viewBoxSize={[100, 100]}
-      labelPosition={100}
-      labelStyle={{
-        fontSize: "4px",
-        fontWeight: "800",
-      }}
-    />
-    <PieChart
-      style={{ width: '25%' }}
-      animate
-      animationDuration={500}
-      animationEasing="ease-out"
-      center={[50, 50]}
-      data={chartData} label={(data) => `${data.dataEntry.title}`}
-      lengthAngle={270}
-      lineWidth={20}
-      paddingAngle={0}
-      radius={50}
-      startAngle={270}
-      viewBoxSize={[100, 100]}
-      labelPosition={90}
-      labelStyle={{
-        fontSize: "5px",
-        fontWeight: "800",
-      }}
-    />
+    <div className="chart-container">
+      <PieChart
+        onClick={createSubCatPieChart}
+        className="big-chart"
+        animate
+        animationDuration={500}
+        animationEasing="linear"
+        center={[50, 50]}
+        data={chartData} label={(data) => `${data.dataEntry.title} \n ${data.dataEntry.value}%`}
+        lengthAngle={360}
+        lineWidth={15}
+        paddingAngle={5}
+        radius={50}
+        startAngle={90}
+        viewBoxSize={[100, 100]}
+        labelPosition={100}
+        labelStyle={{
+          fontSize: "4px",
+          fontWeight: "800",
+        }}
+      />
+      {showSubChart &&
+        <PieChart
+          className="small-chart"
+          animate
+          animationDuration={500}
+          animationEasing="ease-out"
+          center={[50, 50]}
+          data={chartData} label={(data) => `${data.dataEntry.title}`}
+          lengthAngle={270}
+          lineWidth={20}
+          paddingAngle={0}
+          radius={35}
+          startAngle={270}
+          viewBoxSize={[100, 100]}
+          labelPosition={70}
+          labelStyle={{
+            fontSize: "5px",
+            fontWeight: "800",
+          }}
+        />
+      }
+    </div>
   </>
 }
 
