@@ -1,6 +1,6 @@
 import CategoryHeader from "./CategoryHeader";
 import { PieChart } from "react-minimal-pie-chart";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutatedTaskList: any, totalMinutes: number, minToHours: Function }) => {
 
@@ -14,6 +14,7 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
 
   const categoryList = groupByMainCategory(unmutatedTaskList);
   const chartData: Data = [];
+  let smallChartData: any = useRef([]);
   const [showSubChart, setShowSubChart] = useState(false);
 
   // console.log(categoryList);
@@ -23,7 +24,7 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
 
   function convertToChartData(list: any) {
     for (let i = 0; i < list.length; i++) {
-      chartData.push({ title: `${list[i][0].category.substring(0, 10)}`, value: Math.round(list[i][0].totalMin / totalMinutes * 100), color: generateRandomColorHex() })
+      chartData.push({ title: `${list[i][0].category}`, value: Math.round(list[i][0].totalMin / totalMinutes * 100), color: generateRandomColorHex() })
     }
   };
 
@@ -67,7 +68,6 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
     });
 
     sortCategories(tempList, false);
-
 
     return tempList;
   }
@@ -116,9 +116,26 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
   }
 
   function createSubCatPieChart(e: any) {
+    smallChartData.current = [];
+
     let selectedCategoryTitle: string = e.target.innerHTML.split('>')[1].split('</')[0];
 
     console.log(selectedCategoryTitle);
+    console.log(categoryList);
+
+    for (let i = 0; i < categoryList.length; i++) {
+      if (selectedCategoryTitle === categoryList[i][0].category) {
+        console.log(categoryList[i][0].subCategories)
+
+        for (let k = 0; k < categoryList[i][0].subCategories.length; k++) {
+          smallChartData.current.push({ title: `${categoryList[i][0].subCategories[k].category}`, value: Math.round(categoryList[i][0].subCategories[k].totalMin / totalMinutes * 100), color: generateRandomColorHex() })
+        }
+      }
+    }
+
+    // turn OFF subchart if click the already selected category, switch to newly selected subchart if category is different
+
+    setShowSubChart(!showSubChart);
   }
 
   return <>
@@ -154,7 +171,7 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
           animationDuration={500}
           animationEasing="ease-out"
           center={[50, 50]}
-          data={chartData} label={(data) => `${data.dataEntry.title}`}
+          data={smallChartData.current} label={(data) => `${data.dataEntry.title}`}
           lengthAngle={270}
           lineWidth={20}
           paddingAngle={0}
@@ -163,8 +180,8 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
           viewBoxSize={[100, 100]}
           labelPosition={70}
           labelStyle={{
-            fontSize: "5px",
-            fontWeight: "800",
+            fontSize: "3.5px",
+            // fontWeight: "800",
           }}
         />
       }
