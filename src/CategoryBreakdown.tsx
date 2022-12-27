@@ -16,8 +16,7 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
   const chartData: Data = [];
   let smallChartData: any = useRef([]);
   const [showSubChart, setShowSubChart] = useState(false);
-
-  // console.log(categoryList);
+  const [showBreakdown, setShowBreakdown] = useState(false);
 
   convertToChartData(categoryList);
   generateRandomColorHex();
@@ -138,53 +137,64 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
     setShowSubChart(!showSubChart);
   }
 
-  return <>
-    <h1>Category Breakdown</h1>
-    {categoryList.map((category: any, index: number) => {
-      return <CategoryHeader key={index} categoryInfo={category[0]} totalMinutes={totalMinutes} minToHours={minToHours} />
-    })}
-    <div className="chart-container">
-      <PieChart
-        onClick={createSubCatPieChart}
-        className="big-chart"
-        animate
-        animationDuration={500}
-        animationEasing="linear"
-        center={[50, 50]}
-        data={chartData} label={(data) => `${data.dataEntry.title} \n ${data.dataEntry.value}%`}
-        lengthAngle={360}
-        lineWidth={15}
-        paddingAngle={5}
-        radius={50}
-        startAngle={90}
-        viewBoxSize={[100, 100]}
-        labelPosition={100}
-        labelStyle={{
-          fontSize: "4px",
-          fontWeight: "800",
-        }}
-      />
-      {showSubChart &&
+  if (showBreakdown) {
+    return <>
+      <div className="header-and-btn-container">
+        <h1>Category Breakdown</h1>
+        <button onClick={() => setShowBreakdown(false)}>Hide</button>
+      </div>
+      {categoryList.map((category: any, index: number) => {
+        return <CategoryHeader key={index} categoryInfo={category[0]} totalMinutes={totalMinutes} minToHours={minToHours} />
+      })}
+      <div className="chart-container">
         <PieChart
-          className="small-chart"
+          onClick={createSubCatPieChart}
+          className="big-chart"
           animate
           animationDuration={500}
-          animationEasing="ease-out"
+          animationEasing="linear"
           center={[50, 50]}
-          data={smallChartData.current} label={(data) => `${data.dataEntry.title}`}
-          lengthAngle={270}
-          lineWidth={20}
-          paddingAngle={0}
-          radius={35}
-          startAngle={270}
+          data={chartData} label={(data) => `${data.dataEntry.title} \n ${data.dataEntry.value}%`}
+          lengthAngle={360}
+          lineWidth={15}
+          paddingAngle={5}
+          radius={50}
+          startAngle={90}
           viewBoxSize={[100, 100]}
-          labelPosition={70}
+          labelPosition={100}
           labelStyle={{
-            fontSize: "3.5px",
-            // fontWeight: "800",
+            fontSize: "4px",
+            fontWeight: "800",
           }}
         />
-      }
+        {showSubChart &&
+          <PieChart
+            className="small-chart"
+            animate
+            animationDuration={500}
+            animationEasing="ease-out"
+            center={[50, 50]}
+            data={smallChartData.current} label={(data) => `${data.dataEntry.title}`}
+            lengthAngle={270}
+            lineWidth={20}
+            paddingAngle={0}
+            radius={35}
+            startAngle={270}
+            viewBoxSize={[100, 100]}
+            labelPosition={70}
+            labelStyle={{
+              fontSize: "3.5px",
+            }}
+          />
+        }
+      </div>
+    </>
+  }
+
+  return <>
+    <div className="header-and-btn-container">
+      <h1>Category Breakdown</h1>
+      <button onClick={() => setShowBreakdown(true)}>Show</button>
     </div>
   </>
 }

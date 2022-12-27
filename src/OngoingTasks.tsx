@@ -6,29 +6,36 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
 
   const totalHours = minToHours(totalMinutes);
 
+  const uploadTxtFile = () => {
+    // convert .txt file to task array, may need to be in the App component
+  }
+
   if (showTasks) {
     return (
       <div>
-        <h1>Ongoing Tasks <span>{totalHours} hours</span></h1>
-        <div id='ongoing-tasks-buttons-display'>
-          <button onClick={() => setShowTasks(false)}>Hide</button>
-          <button>Import from Firebase</button>
-          <button>Upload .txt File to Firebase</button>
+        <div className='header-and-btn-container'>
+          <h1>Ongoing Tasks</h1>
+          <div id='ongoing-tasks-buttons-display'>
+            <button onClick={() => setShowTasks(false)}>Hide</button>
+            <div className='pseudo-btn'>import .txt <input type='file' /></div>
+          </div>
         </div>
-        {unmutatedTaskList.map((item: any) => {
-          return <Task key={item.id} {...item} />
-        })}
-      </div>
+        <p>{totalHours} hours</p>
+        {
+          unmutatedTaskList.map((item: any) => {
+            return <Task key={item.id} {...item} />
+          })
+        }
+      </div >
     )
   }
 
   return (
-    <div>
-      <h1>Ongoing Tasks <span>{totalHours} hours</span></h1>
+    <div className='header-and-btn-container'>
+      <h1>Ongoing Tasks</h1>
       <div id='ongoing-tasks-buttons-display'>
         <button onClick={() => setShowTasks(true)}>Show</button>
-        <button>Import from Firebase</button>
-        <button>Upload .txt File to Firebase</button>
+        <div className='pseudo-btn'>import .txt <input type='file' /></div>
       </div>
     </div>
   )

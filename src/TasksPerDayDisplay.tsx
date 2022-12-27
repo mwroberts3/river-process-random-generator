@@ -59,8 +59,10 @@ const TasksPerDayDisplay = ({ masterTaskList, unmutatedTaskList }: { masterTaskL
 
   return (
     <>
-      <h1>Tasks Per Day</h1>
-      <button onClick={() => calculateTasksPerDay()}>Randomize Tasks</button>
+      <div className="header-and-btn-container">
+        <h1>Tasks Per Day</h1>
+        <button onClick={() => calculateTasksPerDay()}>Randomize Tasks</button>
+      </div>
       <section id='tasks-per-day-display'>
         {weeklyArray.map((day, index) => {
           return <div key={index}>

@@ -13,7 +13,6 @@ body {
   border-right: 5px dashed skyblue;
 }
 
-
 header {
   text-align: center;
 }
@@ -24,7 +23,11 @@ header h1 {
 }
 
 header h1 small {
-  font-size: 20px;
+  font-size: 14px;
+}
+
+h1 {
+  margin-bottom: 5px;
 }
 
 footer {
@@ -39,11 +42,49 @@ button {
   cursor: pointer;
   display: block;
   font-weight: bold;
-  padding: 10px;
-  margin: 5px 0;
+  /* padding: 10px; */
+  /* margin: 25px 0; */
+  height: 40px;
   border: none;
   border-radius: 5px;
-  background: rgb(193, 255, 193);
+  background: #c1ffc1;
+  width: 160px;
+}
+
+.pseudo-btn {
+  display: block;
+  font-weight: bold;
+  padding: 7px 4px 0px;
+  /* margin: 25px 0; */
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  background: #c1ffc1;
+}
+
+input[type='file'] {
+  width: 180px;
+}
+
+.header-and-btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.header-and-btn-container h1 {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 479px) {
+  h1 {
+    font-size: 30px;
+  }
+
+  button {
+    margin-top: 5px;
+    width: 80%;
+  }
 }
 
 #tasks-per-day-display {
