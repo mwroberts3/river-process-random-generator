@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 /* Main Styling */
 html {
   background-color: #ffe8b7;
 }
 
 body {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Ubuntu', sans-serif;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -124,6 +126,39 @@ input[type='file'] {
   margin-right: 5px;
 }
 
+#ongoing-tasks-table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+th {
+  position: relative;
+  cursor: pointer;
+}
+
+th:first-of-type {
+  text-align: left
+}
+
+tr td:first-of-type {
+  text-align: left
+}
+
+tr:nth-child(even) {
+  background: #eee
+}
+
+td {
+  padding: 5px
+}
+
+.table-icons {
+  position: absolute;
+  top: 3px;
+
+}
+
 .chart-container {
   position: relative;
   width: 100%;
@@ -134,7 +169,6 @@ input[type='file'] {
   position: absolute;
   width: 100%;
   top: 0;
-  /* transform: translate(50%); */
   cursor: pointer;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   z-index: 2;
@@ -144,7 +178,6 @@ input[type='file'] {
   position: absolute;
   width: 100%;
   top: 0;
-  /* transform: translate(50%); */
 }
 
 /* Task Classes */
