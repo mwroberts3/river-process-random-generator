@@ -55,8 +55,8 @@ button {
   display: block;
   font-weight: bold;
   padding: 7px 4px 0px;
-  /* margin: 25px 0; */
-  height: 32px;
+
+  height: 33px;
   border: none;
   border-radius: 5px;
   background: #c1ffc1;
@@ -132,8 +132,9 @@ input[type='file'] {
 
 .big-chart {
   position: absolute;
-  width: 50%;
+  width: 100%;
   top: 0;
+  /* transform: translate(50%); */
   cursor: pointer;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   z-index: 2;
@@ -141,11 +142,9 @@ input[type='file'] {
 
 .small-chart {
   position: absolute;
-  width: 50%;
+  width: 100%;
   top: 0;
-  /* filter: invert(100%); */
-  /* background: black; */
-  /* z-index: 2; */
+  /* transform: translate(50%); */
 }
 
 /* Task Classes */

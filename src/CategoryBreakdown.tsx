@@ -117,10 +117,9 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
   function createSubCatPieChart(e: any) {
     smallChartData.current = [];
 
-    let selectedCategoryTitle: string = e.target.innerHTML.split('>')[1].split('</')[0];
+    console.log(e);
 
-    console.log(selectedCategoryTitle);
-    console.log(categoryList);
+    let selectedCategoryTitle: string = e.target.innerHTML.split('>')[1].split('</')[0];
 
     for (let i = 0; i < categoryList.length; i++) {
       if (selectedCategoryTitle === categoryList[i][0].category) {
