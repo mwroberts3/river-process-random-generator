@@ -5,12 +5,19 @@ import { IconContext } from 'react-icons/lib/esm/iconContext';
 
 const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutatedTaskList: any, totalMinutes: number, minToHours: Function }) => {
   const [showTasks, setShowTasks] = useState(false);
+  const [sortByTask, setSortByTask] = useState(false);
+  const [sortByCategory, setSortByCategory] = useState(false);
+  const [sortByTimesPerWeek, setSortByTimesPerWeek] = useState(false);
+  const [sortByMinutes, setSortByMinutes] = useState(false);
+
 
   const totalHours = minToHours(totalMinutes);
 
-  const sortTable = (e: any) => {
-    console.log(e.target.textContent);
-    console.log(e.target.innerHTML.split('d="M0 ')[1].split('z"')[0]);
+  const sortTable = (e: any, setArrowUp: any) => {
+    const selectedSortCategory = e.target.textContent === 'Times Per Week ' ? 'timesPerWeek' : e.target.textContent.toLowerCase().trim();
+    const arrowUp = e.target.innerHTML.split('d="M0 ')[1].split('z"')[0] === '0h24v24H0' ? true : false;
+
+    setArrowUp(!arrowUp);
   }
 
   if (showTasks) {
@@ -27,10 +34,10 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
           <table id="ongoing-tasks-table">
             <tbody>
               <tr>
-                <th onClick={sortTable}>Task <MdKeyboardArrowUp /></th>
-                <th onClick={sortTable}>Category <MdKeyboardArrowUp /></th>
-                <th onClick={sortTable}>Times Per Week <MdKeyboardArrowDown /></th>
-                <th onClick={sortTable}>Minutes <MdKeyboardArrowDown /></th>
+                <th onClick={(e) => sortTable(e, setSortByTask)}>Task {sortByTask ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
+                <th onClick={(e) => sortTable(e, setSortByCategory)}>Category {sortByCategory ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
+                <th onClick={(e) => sortTable(e, setSortByTimesPerWeek)}>Times Per Week {sortByTimesPerWeek ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
+                <th onClick={(e) => sortTable(e, setSortByMinutes)}>Minutes {sortByMinutes ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
               </tr>
               {
                 unmutatedTaskList.map((item: any) => {
