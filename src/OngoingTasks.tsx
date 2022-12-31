@@ -10,14 +10,39 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
   const [sortByTimesPerWeek, setSortByTimesPerWeek] = useState(false);
   const [sortByMinutes, setSortByMinutes] = useState(false);
 
-
   const totalHours = minToHours(totalMinutes);
 
   const sortTable = (e: any, setArrowUp: any) => {
-    const selectedSortCategory = e.target.textContent === 'Times Per Week ' ? 'timesPerWeek' : e.target.textContent.toLowerCase().trim();
+    let selectedSortCategory = e.target.textContent === 'Times Per Week ' ? 'timesPerWeek' : e.target.textContent === 'Category ' ? 'categories' : e.target.textContent.toLowerCase().trim();
+
     const arrowUp = e.target.innerHTML.split('d="M0 ')[1].split('z"')[0] === '0h24v24H0' ? true : false;
 
+    if (selectedSortCategory === 'task') {
+      unmutatedTaskList.sort((a: any, b: any) =>
+        sortShortHand(a[selectedSortCategory as keyof typeof a].toLowerCase(), b[selectedSortCategory as keyof typeof b].toLowerCase()))
+    };
+
+    if (selectedSortCategory === 'categories') {
+      unmutatedTaskList.sort((a: any, b: any) =>
+        sortShortHand(a[selectedSortCategory as keyof typeof a][0].toLowerCase(), b[selectedSortCategory as keyof typeof b][0].toLowerCase()))
+    };
+
+    if (selectedSortCategory === 'timesPerWeek' || selectedSortCategory === 'minutes') {
+      unmutatedTaskList.sort((a: any, b: any) =>
+        sortShortHand(a[selectedSortCategory as keyof typeof a], b[selectedSortCategory as keyof typeof b]))
+    };
+
     setArrowUp(!arrowUp);
+
+    function sortShortHand(a: any, b: any) {
+      if (arrowUp) {
+        if (a > b) return 1;
+        else return -1;
+      } else {
+        if (a > b) return -1;
+        else return 1;
+      }
+    }
   }
 
   if (showTasks) {
@@ -33,7 +58,7 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
         <IconContext.Provider value={{ className: 'table-icons' }}>
           <table id="ongoing-tasks-table">
             <tbody>
-              <tr>
+              <tr className='non-hover'>
                 <th onClick={(e) => sortTable(e, setSortByTask)}>Task {sortByTask ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
                 <th onClick={(e) => sortTable(e, setSortByCategory)}>Category {sortByCategory ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
                 <th onClick={(e) => sortTable(e, setSortByTimesPerWeek)}>Times Per Week {sortByTimesPerWeek ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
@@ -41,7 +66,7 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
               </tr>
               {
                 unmutatedTaskList.map((item: any) => {
-                  console.log(item);
+                  // console.log(item);
                   return <Task key={item.id} {...item} />
                 })
               }
@@ -57,7 +82,6 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
       <h1>Ongoing Tasks</h1>
       <div id='ongoing-tasks-buttons-display'>
         <button onClick={() => setShowTasks(true)}>Show</button>
-        {/* <div className='pseudo-btn'>import .txt <input type='file' /></div> */}
       </div>
     </div>
   )

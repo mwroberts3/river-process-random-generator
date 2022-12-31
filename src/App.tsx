@@ -5,7 +5,10 @@ import CategoryBreakdown from './CategoryBreakdown';
 import { masterTaskList } from './data'
 
 function App() {
-  const unmutatedTaskList = structuredClone(masterTaskList);
+  const unmutatedTaskList = structuredClone(masterTaskList).sort((a: any, b: any) => {
+    if (a.task > b.task) return 1;
+    else return -1;
+  });
 
   const totalMinutes: number = unmutatedTaskList.reduce((accumulator: number, task: any) => accumulator + task.minEstimate * task.timesPerWeek, 0);
 

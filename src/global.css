@@ -141,12 +141,24 @@ th:first-of-type {
   text-align: left
 }
 
+tr {
+  transition: background 0.2s ease;
+}
+
 tr td:first-of-type {
   text-align: left
 }
 
 tr:nth-child(even) {
   background: #eee
+}
+
+tr:hover {
+  background: #a1d9ff;
+}
+
+.non-hover:hover {
+  background: none;
 }
 
 td {
@@ -186,8 +198,6 @@ td {
   color: green;
   font-weight: bold;
 }
-
-.wellness {}
 
 .the-game {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
