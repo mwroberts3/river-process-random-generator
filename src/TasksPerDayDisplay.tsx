@@ -70,7 +70,7 @@ const TasksPerDayDisplay = ({ masterTaskList, unmutatedTaskList }: { masterTaskL
             {day.tasks.map((item, index) => {
               return (
                 <div key={index}>
-                  <span className={item.class}>{item.task}</span>
+                  <span className={item.className}>{item.task}</span>
                 </div>
               )
             })}

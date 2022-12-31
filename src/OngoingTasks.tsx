@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Task from './Task'
+import FileImport from './FileImport';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md"
 import { IconContext } from 'react-icons/lib/esm/iconContext';
 
@@ -52,6 +53,7 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
           <h1>Ongoing Tasks</h1>
           <div id='ongoing-tasks-buttons-display'>
             <button onClick={() => setShowTasks(false)}>Hide</button>
+            <FileImport />
           </div>
         </div>
         <p>{totalHours} out of ~72  total non-work/sleep hours per week</p>
@@ -66,7 +68,6 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
               </tr>
               {
                 unmutatedTaskList.map((item: any) => {
-                  // console.log(item);
                   return <Task key={item.id} {...item} />
                 })
               }
@@ -82,6 +83,7 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
       <h1>Ongoing Tasks</h1>
       <div id='ongoing-tasks-buttons-display'>
         <button onClick={() => setShowTasks(true)}>Show</button>
+        <FileImport />
       </div>
     </div>
   )
