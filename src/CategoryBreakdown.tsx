@@ -2,7 +2,7 @@ import CategoryHeader from "./CategoryHeader";
 import { PieChart } from "react-minimal-pie-chart";
 import { useState, useRef } from 'react';
 
-const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutatedTaskList: any, totalMinutes: number, minToHours: Function }) => {
+const CategoryBreakdown = ({ csvImport, totalMinutes, minToHours }: { csvImport: any, totalMinutes: number, minToHours: Function }) => {
 
   type Data = {
     color: string;
@@ -12,7 +12,7 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
     [key: string]: any;
   }[];
 
-  const categoryList = groupByMainCategory(unmutatedTaskList);
+  const categoryList = groupByMainCategory(csvImport);
   const chartData: Data = [];
   let smallChartData: any = useRef([]);
   const [showSubChart, setShowSubChart] = useState(false);
@@ -117,9 +117,10 @@ const CategoryBreakdown = ({ unmutatedTaskList, totalMinutes, minToHours }: { un
   function createSubCatPieChart(e: any) {
     smallChartData.current = [];
 
-    console.log(e);
-
     let selectedCategoryTitle: string = e.target.innerHTML.split('>')[1].split('</')[0];
+
+    console.log(selectedCategoryTitle);
+    console.log(categoryList);
 
     for (let i = 0; i < categoryList.length; i++) {
       if (selectedCategoryTitle === categoryList[i][0].category) {

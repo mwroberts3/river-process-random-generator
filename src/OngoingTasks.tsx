@@ -4,7 +4,7 @@ import FileImport from './FileImport';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md"
 import { IconContext } from 'react-icons/lib/esm/iconContext';
 
-const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutatedTaskList: any, totalMinutes: number, minToHours: Function }) => {
+const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { csvImport: any, totalMinutes: number, minToHours: Function, setCSVImport: Function }) => {
   const [showTasks, setShowTasks] = useState(false);
   const [sortByTask, setSortByTask] = useState(false);
   const [sortByCategory, setSortByCategory] = useState(false);
@@ -19,17 +19,17 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
     const arrowUp = e.target.innerHTML.split('d="M0 ')[1].split('z"')[0] === '0h24v24H0' ? true : false;
 
     if (selectedSortCategory === 'task') {
-      unmutatedTaskList.sort((a: any, b: any) =>
+      csvImport.sort((a: any, b: any) =>
         sortShortHand(a[selectedSortCategory as keyof typeof a].toLowerCase(), b[selectedSortCategory as keyof typeof b].toLowerCase()))
     };
 
     if (selectedSortCategory === 'categories') {
-      unmutatedTaskList.sort((a: any, b: any) =>
+      csvImport.sort((a: any, b: any) =>
         sortShortHand(a[selectedSortCategory as keyof typeof a][0].toLowerCase(), b[selectedSortCategory as keyof typeof b][0].toLowerCase()))
     };
 
     if (selectedSortCategory === 'timesPerWeek' || selectedSortCategory === 'minutes') {
-      unmutatedTaskList.sort((a: any, b: any) =>
+      csvImport.sort((a: any, b: any) =>
         sortShortHand(a[selectedSortCategory as keyof typeof a], b[selectedSortCategory as keyof typeof b]))
     };
 
@@ -53,7 +53,7 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
           <h1>Ongoing Tasks</h1>
           <div id='ongoing-tasks-buttons-display'>
             <button onClick={() => setShowTasks(false)}>Hide</button>
-            <FileImport />
+            <FileImport setCSVImport={setCSVImport} />
           </div>
         </div>
         <p>{totalHours} out of ~72  total non-work/sleep hours per week</p>
@@ -67,7 +67,7 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
                 <th onClick={(e) => sortTable(e, setSortByMinutes)}>Minutes {sortByMinutes ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
               </tr>
               {
-                unmutatedTaskList.map((item: any) => {
+                csvImport.map((item: any) => {
                   return <Task key={item.id} {...item} />
                 })
               }
@@ -83,7 +83,7 @@ const OngoingTasks = ({ unmutatedTaskList, totalMinutes, minToHours }: { unmutat
       <h1>Ongoing Tasks</h1>
       <div id='ongoing-tasks-buttons-display'>
         <button onClick={() => setShowTasks(true)}>Show</button>
-        <FileImport />
+        <FileImport setCSVImport={setCSVImport} />
       </div>
     </div>
   )

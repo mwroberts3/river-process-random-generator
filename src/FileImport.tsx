@@ -1,4 +1,4 @@
-const FileImport = () => {
+const FileImport = ({ setCSVImport }: { setCSVImport: Function }) => {
   const importCSVFile = (e: any) => {
     e.preventDefault();
 
@@ -11,13 +11,26 @@ const FileImport = () => {
     const reader = new FileReader();
     reader.readAsText(input);
 
+    const csvImportArray: any = [];
     reader.onload = function (e) {
       if (e.target) {
-        const text = e.target.result;
-        console.log(text);
-        // document.write(text);
+        let text: any = e.target.result;
+        text = text.split('\r\n').splice(1);
+
+        text.forEach((row: string, index: number) => {
+          csvImportArray.push({
+            id: index,
+            task: row.split(',')[0],
+            categories: [row.split(',')[1], row.split(',')[2]],
+            timesPerWeek: row.split(',')[3],
+            className: row.split(',')[4],
+            minEstimate: row.split(',')[5]
+          })
+        })
       }
     };
+
+    setCSVImport(() => csvImportArray);
   }
 
   return (
