@@ -194,7 +194,7 @@ const CategoryBreakdown = ({ csvImport, totalMinutes, minToHours }: { csvImport:
   return <>
     <div className="header-and-btn-container">
       <h1>Category Breakdown</h1>
-      <button onClick={() => setShowBreakdown(true)}>Show</button>
+      <button onClick={() => csvImport.length > 0 ? setShowBreakdown(true) : alert('please load .csv file')}>Show</button>
     </div>
   </>
 }

@@ -42,29 +42,33 @@ footer h4 {
 
 button {
   cursor: pointer;
-  display: block;
   font-weight: bold;
-  /* padding: 10px; */
-  /* margin: 25px 0; */
   height: 40px;
   border: none;
   border-radius: 5px;
-  background: #c1ffc1;
+  background: #97d5ff;
   width: 160px;
+  box-shadow: 2px 2px 0px #5c5c5c;
 }
 
 .pseudo-btn {
+  position: relative;
   display: block;
   font-weight: bold;
   padding: 7px 4px 0px;
   height: 33px;
   border: none;
   border-radius: 5px;
-  background: #c1ffc1;
+  background: #97d5ff;
+  box-shadow: 2px 2px 0px #5c5c5c;
+  width: 100%;
 }
 
-input[type='file'] {
-  width: 180px;
+#filename-overlay {
+  position: absolute;
+  background: #97d5ff;
+  top: 8px;
+  left: 94px;
 }
 
 .header-and-btn-container {
@@ -121,7 +125,11 @@ input[type='file'] {
   display: flex;
 }
 
-#ongoing-tasks-buttons-display button {
+#ongoing-tasks-buttons-display form {
+  display: flex;
+}
+
+#ongoing-tasks-buttons-display * {
   margin-right: 5px;
 }
 

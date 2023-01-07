@@ -35,8 +35,10 @@ const TasksPerDayDisplay = ({ csvImport }: { csvImport: TaskType[] }) => {
             let randomWeekDay = Math.floor(Math.random() * 7);
 
             if (!tempWeeklyArray[randomWeekDay].tasks.includes(clonedCsvImport[k])) {
+              if (clonedCsvImport[k].active) {
+                tempWeeklyArray[randomWeekDay].tasks.push(clonedCsvImport[k]);
+              }
               clonedCsvImport[k].timesPerWeek -= 1;
-              tempWeeklyArray[randomWeekDay].tasks.push(clonedCsvImport[k]);
             } else {
               totalTasks++;
             }
@@ -68,7 +70,7 @@ const TasksPerDayDisplay = ({ csvImport }: { csvImport: TaskType[] }) => {
     <>
       <div className="header-and-btn-container">
         <h1>Tasks Per Day</h1>
-        <button onClick={() => setRandomTasks(!randomTasks)}>Randomize Tasks</button>
+        <button onClick={() => csvImport.length > 0 ? setRandomTasks(!randomTasks) : alert('please load .csv file')}>Randomize Tasks</button>
       </div>
       <section id='tasks-per-day-display'>
         {weeklyArray.map((day, index) => {

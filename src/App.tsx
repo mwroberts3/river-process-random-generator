@@ -14,8 +14,6 @@ function App() {
 
   useEffect(() => {
     const fileLoadCheck = setInterval(() => {
-      console.log('loading csv file')
-
       if (csvImport.length > 0) {
         clearInterval(fileLoadCheck);
 

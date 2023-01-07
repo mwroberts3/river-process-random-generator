@@ -1,12 +1,18 @@
-const FileImport = ({ setCSVImport }: { setCSVImport: Function }) => {
+const FileImport = ({ setCSVImport, filename }: { setCSVImport: Function, filename: any }) => {
+
   const importCSVFile = (e: any) => {
     e.preventDefault();
 
     const csvFile: any = document.getElementById('csvFile');
 
+    // csvFile.value = 'test';
+
     const input: Blob = csvFile.files[0];
     const err = 'please select valid .csv file'
     if (!input || input.type !== 'text/csv') alert(err);
+
+    console.log(input.name);
+
 
     const reader = new FileReader();
     reader.readAsText(input);
@@ -31,13 +37,13 @@ const FileImport = ({ setCSVImport }: { setCSVImport: Function }) => {
       }
     };
 
+    filename.current = input.name;
     setCSVImport(() => csvImportArray);
   }
 
   return (
-    <form onSubmit={importCSVFile}>
-      <div className='pseudo-btn'><input type='file' id='csvFile' accept='.csv' /></div>
-      <button>Import .csv</button>
+    <form onChange={importCSVFile}>
+      <div className='pseudo-btn'><input type='file' id='csvFile' accept='.csv' /><span id="filename-overlay">{filename.current}</span></div>
     </form>
   )
 }

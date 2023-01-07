@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useRef } from 'react'
 import Task from './Task'
 import FileImport from './FileImport';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md"
@@ -10,6 +10,8 @@ const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { c
   const [sortByCategory, setSortByCategory] = useState(false);
   const [sortByTimesPerWeek, setSortByTimesPerWeek] = useState(false);
   const [sortByMinutes, setSortByMinutes] = useState(false);
+
+  const filename = useRef('');
 
   const totalHours = minToHours(totalMinutes);
 
@@ -53,7 +55,7 @@ const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { c
           <h1>Ongoing Tasks</h1>
           <div id='ongoing-tasks-buttons-display'>
             <button onClick={() => setShowTasks(false)}>Hide</button>
-            <FileImport setCSVImport={setCSVImport} />
+            <FileImport setCSVImport={setCSVImport} filename={filename} />
           </div>
         </div>
         <p>{totalHours} out of ~72  total non-work/sleep hours per week</p>
@@ -85,8 +87,8 @@ const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { c
     <div className='header-and-btn-container'>
       <h1>Ongoing Tasks</h1>
       <div id='ongoing-tasks-buttons-display'>
-        <button onClick={() => setShowTasks(true)}>Show</button>
-        <FileImport setCSVImport={setCSVImport} />
+        <button onClick={() => csvImport.length > 0 ? setShowTasks(true) : alert('please load .csv file')}>Show</button>
+        <FileImport setCSVImport={setCSVImport} filename={filename} />
       </div>
     </div>
   )
