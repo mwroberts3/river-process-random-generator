@@ -19,7 +19,12 @@ function App() {
       if (csvImport.length > 0) {
         clearInterval(fileLoadCheck);
 
-        setTotalMinutes(csvImport.reduce((accumulator: number, task: any) => accumulator + task.minEstimate * task.timesPerWeek, 0));
+        setTotalMinutes(csvImport.reduce((accumulator: number, task: any) => {
+          if (task.active) {
+            return accumulator + task.minEstimate * task.timesPerWeek;
+          }
+          return accumulator;
+        }, 0));
       }
     }, 500);
 

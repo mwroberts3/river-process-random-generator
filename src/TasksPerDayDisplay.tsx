@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react'
-import { Task } from './data';
+import { TaskType } from './data';
+import Task from './Task';
 
-const TasksPerDayDisplay = ({ csvImport }: { csvImport: Task[] }) => {
+const TasksPerDayDisplay = ({ csvImport }: { csvImport: TaskType[] }) => {
 
-  type Day = { day: string, tasks: Task[], hours: string };
+  type Day = { day: string, tasks: TaskType[], hours: string };
 
   const [weeklyArray, setWeeklyArray] = useState<Day[]>([]);
   const [randomTasks, setRandomTasks] = useState(false);
 
-  console.log(csvImport);
 
   useEffect(() => {
     const randomizeTimer = setTimeout(() => {
       const clonedCsvImport = structuredClone(csvImport);
 
-      let totalTasks = clonedCsvImport.reduce((accumulator: number, task: Task) => {
-        return accumulator + +task.timesPerWeek;
+      let totalTasks = clonedCsvImport.reduce((accumulator: number, task: TaskType) => {
+        if (task.active) return accumulator + task.timesPerWeek;
+        return accumulator;
       }, 0);
 
       const tempWeeklyArray: Array<Day> = [
@@ -27,7 +28,6 @@ const TasksPerDayDisplay = ({ csvImport }: { csvImport: Task[] }) => {
         { day: 'Saturday', tasks: [], hours: '' },
         { day: 'Sunday', tasks: [], hours: '' }];
 
-      console.log(totalTasks);
 
       for (let i = 0; i < totalTasks; i++) {
         for (let k = 0; k < clonedCsvImport.length; k++) {
@@ -46,8 +46,8 @@ const TasksPerDayDisplay = ({ csvImport }: { csvImport: Task[] }) => {
 
       // set minutes per day estimate
       tempWeeklyArray.forEach((day) => {
-        const dailyTotalMinutes = day.tasks.reduce((accumulator: number, task: Task) => {
-          return accumulator + +task.minEstimate
+        const dailyTotalMinutes = day.tasks.reduce((accumulator: number, task: TaskType) => {
+          return accumulator + task.minEstimate
         }, 0);
 
         const hours = Math.floor(dailyTotalMinutes / 60);
@@ -74,12 +74,8 @@ const TasksPerDayDisplay = ({ csvImport }: { csvImport: Task[] }) => {
         {weeklyArray.map((day, index) => {
           return <div key={index}>
             <h3>{day.day} <span>~{day.hours}</span></h3>
-            {day.tasks.map((item, index) => {
-              return (
-                <div key={index}>
-                  <span className={item.className}>{item.task}</span>
-                </div>
-              )
+            {day.tasks.map((task: any) => {
+              return <Task key={task.id} {...task} display={'Tasks Per Day'} />
             })}
           </div>
         })}

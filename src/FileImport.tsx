@@ -22,9 +22,10 @@ const FileImport = ({ setCSVImport }: { setCSVImport: Function }) => {
             id: index,
             task: row.split(',')[0],
             categories: [row.split(',')[1], row.split(',')[2]],
-            timesPerWeek: row.split(',')[3],
-            className: row.split(',')[4],
-            minEstimate: row.split(',')[5]
+            timesPerWeek: +row.split(',')[3],
+            color: row.split(',')[4],
+            minEstimate: +row.split(',')[5],
+            active: row.split(',')[6] === '1' ? true : false
           })
         })
       }

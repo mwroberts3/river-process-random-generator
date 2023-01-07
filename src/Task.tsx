@@ -1,12 +1,19 @@
-const Task = ({ task, timesPerWeek, minEstimate, categories, className }: { task: string, timesPerWeek: number, minEstimate: number, categories: Array<string>, className: string }) => {
+const Task = ({ task, timesPerWeek, minEstimate, categories, color, display }: { task: string, timesPerWeek: number, minEstimate: number, categories: Array<string>, color: string, display: string }) => {
 
+  if (display === 'Ongoing Tasks') {
+    return (
+      <tr>
+        <td style={{ color: color }}>{task}</td>
+        <td>{categories[0]}</td>
+        <td>{timesPerWeek}</td>
+        <td>{minEstimate}</td>
+      </tr>
+    )
+  }
   return (
-    <tr>
-      <td className={className}>{task}</td>
-      <td>{categories[0]}</td>
-      <td>{timesPerWeek}</td>
-      <td>{minEstimate}</td>
-    </tr>
+    <div>
+      <span style={{ color: color }}>{task}</span>
+    </div>
   )
 }
 

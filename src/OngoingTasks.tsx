@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 import Task from './Task'
 import FileImport from './FileImport';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md"
@@ -67,8 +67,11 @@ const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { c
                 <th onClick={(e) => sortTable(e, setSortByMinutes)}>Minutes {sortByMinutes ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}</th>
               </tr>
               {
-                csvImport.map((item: any) => {
-                  return <Task key={item.id} {...item} />
+                csvImport.map((task: any, index: number) => {
+                  if (task.active) {
+                    return <Task key={task.id} {...task} display={'Ongoing Tasks'} />
+                  }
+                  return <Fragment key={index} />;
                 })
               }
             </tbody>

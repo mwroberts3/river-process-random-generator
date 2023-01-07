@@ -48,7 +48,7 @@ const CategoryBreakdown = ({ csvImport, totalMinutes, minToHours }: { csvImport:
   function groupByMainCategory(taskList: any) {
     let tempList: any = [];
     for (let i = 0; i < taskList.length; i++) {
-      tempList.push(JSON.stringify(taskList.filter((task: any) => task.categories[0] === taskList[i].categories[0])));
+      tempList.push(JSON.stringify(taskList.filter((task: any) => task.categories[0] === taskList[i].categories[0] && task.active)));
     }
 
     tempList = listParse(tempList);
