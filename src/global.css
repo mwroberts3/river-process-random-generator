@@ -1,12 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
+/* variables */
+:root {
+  --main-font: 'Ubuntu',
+    sans-serif;
+}
+
 /* Main Styling */
+* {
+  box-sizing: border-box;
+}
+
 html {
   background-color: #ffe8b7;
 }
 
 body {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: var(--main-font);
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -17,6 +27,7 @@ body {
 
 header {
   text-align: center;
+  height: 50px;
 }
 
 header h1 {
@@ -32,12 +43,26 @@ h1 {
   margin-bottom: 5px;
 }
 
-footer {
-  text-align: center;
+#sections-container {
+  min-height: calc(100vh - 60px);
 }
 
-footer h4 {
-  margin: 100px 0 0;
+footer {
+  height: 60px;
+  padding-top: 40px;
+  text-align: center;
+  font-size: 14px;
+}
+
+footer a {
+  color: indigo;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+footer a:active,
+footer a:visited {
+  color: indigo;
 }
 
 button {
@@ -49,12 +74,12 @@ button {
   background: #97d5ff;
   width: 160px;
   box-shadow: 2px 2px 0px #5c5c5c;
+  margin-right: 5px;
 }
 
 .pseudo-btn {
   position: relative;
   display: block;
-  font-weight: bold;
   padding: 7px 4px 0px;
   height: 33px;
   border: none;
@@ -62,34 +87,27 @@ button {
   background: #97d5ff;
   box-shadow: 2px 2px 0px #5c5c5c;
   width: 100%;
+  overflow: hidden;
 }
 
 #filename-overlay {
   position: absolute;
   background: #97d5ff;
-  top: 8px;
+  top: 10px;
   left: 94px;
+  font-size: 14px;
+  width: 174px;
+}
+
+input {
+  font-family: var(--main-font);
 }
 
 .header-and-btn-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
-
-.header-and-btn-container h1 {
-  margin-right: 10px;
-}
-
-@media screen and (max-width: 479px) {
-  h1 {
-    font-size: 30px;
-  }
-
-  button {
-    margin-top: 5px;
-    width: 80%;
-  }
 }
 
 #tasks-per-day-display {
@@ -109,13 +127,6 @@ button {
   font-size: 20px;
 }
 
-@media screen and (max-width: 1000px) {
-  #tasks-per-day-display div {
-    width: 100%;
-    /* padding: 0 25%; */
-  }
-}
-
 #tasks-per-day-display div div {
   margin-top: 5px;
   width: 100%;
@@ -127,10 +138,6 @@ button {
 
 #ongoing-tasks-buttons-display form {
   display: flex;
-}
-
-#ongoing-tasks-buttons-display * {
-  margin-right: 5px;
 }
 
 #ongoing-tasks-table {
@@ -199,24 +206,49 @@ td {
   top: 0;
 }
 
-/* Task Classes */
-.art-life {
-  font-family: ink-free;
-  color: green;
-  font-weight: bold;
+/* small laptop responsiveness */
+@media screen and (max-width: 1000px) {
+  #tasks-per-day-display div {
+    width: 100%;
+  }
 }
 
-.the-game {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-weight: 300;
-}
+/* mobile responsiveness */
+@media screen and (max-width: 479px) {
+  h1 {
+    font-size: 30px;
+  }
 
-.social {
-  color: blue;
-  font-weight: bold;
-  font-style: italic;
-}
+  button {
+    margin-top: 5px;
+    margin-right: 0px;
+    width: 80%;
+  }
 
-.dopa-limit {
-  background: pink;
+  #ongoing-tasks-buttons-display {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #ongoing-tasks-buttons-display form {
+    width: 80%;
+    justify-content: center;
+  }
+
+  .pseudo-btn {
+    margin-top: 10px;
+    width: calc(100% - 6px);
+  }
+
+  #sections-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header-and-btn-container {
+    align-items: center;
+  }
 }

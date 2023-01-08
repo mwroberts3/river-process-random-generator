@@ -5,14 +5,9 @@ const FileImport = ({ setCSVImport, filename }: { setCSVImport: Function, filena
 
     const csvFile: any = document.getElementById('csvFile');
 
-    // csvFile.value = 'test';
-
     const input: Blob = csvFile.files[0];
     const err = 'please select valid .csv file'
     if (!input || input.type !== 'text/csv') alert(err);
-
-    console.log(input.name);
-
 
     const reader = new FileReader();
     reader.readAsText(input);

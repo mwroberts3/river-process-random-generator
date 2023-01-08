@@ -39,14 +39,16 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>River Process <small>v1.0.0</small></h1>
-      </header>
-      <OngoingTasks csvImport={csvImport} totalMinutes={totalMinutes} minToHours={minToHours} setCSVImport={setCSVImport} />
-      <CategoryBreakdown csvImport={csvImport} totalMinutes={totalMinutes} minToHours={minToHours} />
-      <TasksPerDayDisplay csvImport={csvImport} />
+      <div id='sections-container'>
+        <header>
+          <h1>River Process <small>v1.0.0</small></h1>
+        </header>
+        <OngoingTasks csvImport={csvImport} totalMinutes={totalMinutes} minToHours={minToHours} setCSVImport={setCSVImport} />
+        <CategoryBreakdown csvImport={csvImport} totalMinutes={totalMinutes} minToHours={minToHours} />
+        <TasksPerDayDisplay csvImport={csvImport} />
+      </div>
       <footer>
-        <h4>see README.md for information on River Process</h4>
+        see <a href="https://github.com/mwroberts3/river-process-random-generator" target="_blank" rel="noreferrer">README</a> for more information
       </footer>
     </>
   );
