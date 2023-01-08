@@ -1,0 +1,1 @@
+export type TaskType = { id: number | string, task: string, categories: string[], timesPerWeek: number, className: string, timeFrame: string, minEstimate: number, active: boolean };
