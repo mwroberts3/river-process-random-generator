@@ -1,7 +1,7 @@
-Task,Main Category,Sub Category,Times Per Week,Custom Color,Minutes,Active
-Task 1,Cat 1,Sub Cat A,3,blue,20,1
-Task 2,Cat 1,Sub Cat B,1,blue,10,1
-Task 3,Cat 2,Sub Cat A,2,green,60,1
-Task 4,Cat 3,Sub Cat A,3,,15,1
-Task 5,Cat 3,Sub Cat A,3,,5,1
-Task 5,Cat 3,Sub Cat B,4,,10,1
+Task,Main Category,Sub Category,Times Per Week,Minutes,Custom Color,Active
+Task 1,Category 1,Sub Cat A,3,20,blue,1
+Task 2,Category 1,Sub Cat B,1,10,blue,1
+Task 3,Category 2,Sub Cat A,2,60,green,1
+Task 4,Category 3,Sub Cat A,3,15,,1
+Task 5,Category 3,Sub Cat A,3,5,,1
+Task 6,Category 3,Sub Cat B,4,10,,1

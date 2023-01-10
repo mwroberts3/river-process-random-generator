@@ -19,6 +19,8 @@ https://river-process.netlify.app
 ## Future Versions
 ### Known Bugs:
 - Clicking on the text in the category chart does nothing, user has to click on actual color bar for the sub-chart to generate
+- Clicking on a new main category while a different one is already displayed should close the current sub-category display and open the new one
+- Sorting by minutes not working
 
 ## Contributions
 - MIT License

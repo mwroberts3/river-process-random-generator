@@ -1,8 +1,9 @@
 import { useState, Fragment, useRef } from 'react'
-import Task from './Task'
-import FileImport from './FileImport';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md"
 import { IconContext } from 'react-icons/lib/esm/iconContext';
+import { sampleData } from './data';
+import Task from './Task'
+import FileImport from './FileImport';
 
 const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { csvImport: any, totalMinutes: number, minToHours: Function, setCSVImport: Function }) => {
   const [showTasks, setShowTasks] = useState(false);
@@ -50,15 +51,16 @@ const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { c
 
   if (showTasks) {
     return (
-      <div>
+      <>
         <div className='header-and-btn-container'>
           <h1>Ongoing Tasks</h1>
           <div id='ongoing-tasks-buttons-display'>
             <button onClick={() => setShowTasks(false)}>Hide</button>
             <FileImport setCSVImport={setCSVImport} filename={filename} />
+            <button onClick={() => setCSVImport(sampleData)}>Demo</button>
           </div>
         </div>
-        <p>{totalHours} out of ~72  total non-work/sleep hours per week</p>
+        <p>{totalHours} total hours</p>
         <IconContext.Provider value={{ className: 'table-icons' }}>
           <table id="ongoing-tasks-table">
             <tbody>
@@ -79,7 +81,7 @@ const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { c
             </tbody>
           </table>
         </IconContext.Provider>
-      </div >
+      </>
     )
   }
 
@@ -89,6 +91,7 @@ const OngoingTasks = ({ csvImport, totalMinutes, minToHours, setCSVImport }: { c
       <div id='ongoing-tasks-buttons-display'>
         <button onClick={() => csvImport.length > 0 ? setShowTasks(true) : alert('please load .csv file')}>Show</button>
         <FileImport setCSVImport={setCSVImport} filename={filename} />
+        <button onClick={() => setCSVImport(sampleData)}>Demo</button>
       </div>
     </div>
   )

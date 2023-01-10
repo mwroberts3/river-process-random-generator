@@ -58,8 +58,6 @@ const TasksPerDayDisplay = ({ csvImport }: { csvImport: TaskType[] }) => {
         day.hours = `${hours}:${remainderMinutes.toString().padStart(2, '0')}`;
       })
 
-      console.log(tempWeeklyArray);
-
       setWeeklyArray(tempWeeklyArray);
     }, 200);
 

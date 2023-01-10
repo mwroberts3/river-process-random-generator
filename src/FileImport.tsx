@@ -24,8 +24,8 @@ const FileImport = ({ setCSVImport, filename }: { setCSVImport: Function, filena
             task: row.split(',')[0],
             categories: [row.split(',')[1], row.split(',')[2]],
             timesPerWeek: +row.split(',')[3],
-            color: row.split(',')[4],
-            minEstimate: +row.split(',')[5],
+            minEstimate: +row.split(',')[4],
+            color: row.split(',')[5],
             active: row.split(',')[6] === '1' ? true : false
           })
         })

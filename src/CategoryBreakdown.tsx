@@ -119,20 +119,13 @@ const CategoryBreakdown = ({ csvImport, totalMinutes, minToHours }: { csvImport:
 
     let selectedCategoryTitle: string = e.target.innerHTML.split('>')[1].split('</')[0];
 
-    console.log(selectedCategoryTitle);
-    console.log(categoryList);
-
     for (let i = 0; i < categoryList.length; i++) {
       if (selectedCategoryTitle === categoryList[i][0].category) {
-        console.log(categoryList[i][0].subCategories)
-
         for (let k = 0; k < categoryList[i][0].subCategories.length; k++) {
           smallChartData.current.push({ title: `${categoryList[i][0].subCategories[k].category}`, value: Math.round(categoryList[i][0].subCategories[k].totalMin / totalMinutes * 100), color: generateRandomColorHex() })
         }
       }
     }
-
-    // turn OFF subchart if click the already selected category, switch to newly selected subchart if category is different
 
     setShowSubChart(!showSubChart);
   }
